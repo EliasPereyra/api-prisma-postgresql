@@ -23,7 +23,15 @@ app.get("/feed", async (req: Request, res: Response) => {
   res.json(allPosts)
 })
 
+app.get("/posts/:id", async (req: Request, res: Response) => {
+  const { id } = req.params
 
+  const post = await prisma.post.findUnique({
+    where: { id: Number(id) }
+  })
+
+  res.json(post)
+})
 
 app.listen(PORT, () => {
   console.log(`The server is running on port ${PORT}`)
