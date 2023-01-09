@@ -59,6 +59,17 @@ app.post("/post", async (req: Request, res: Response) => {
   res.json(post)
 })
 
+app.put("/post/publish/:id", async (req: Request, res: Response) => {
+  const { id } = req.params
+
+  const postUpdated = await prisma.post.update({
+    where: { id: Number(id) },
+    data: { published: true }
+  })
+
+  res.json(postUpdated)
+})
+
 app.listen(PORT, () => {
   console.log(`The server is running on port ${PORT}`)
 })
