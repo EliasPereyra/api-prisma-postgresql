@@ -70,6 +70,16 @@ app.put("/post/publish/:id", async (req: Request, res: Response) => {
   res.json(postUpdated)
 })
 
+app.delete("/post/:id", async (req: Request, res: Response) => {
+  const { id } = req.params
+
+  await prisma.post.delete({
+    where: { id: Number(id) },
+  })
+
+  res.json("Post deleted")
+})
+
 app.listen(PORT, () => {
   console.log(`The server is running on port ${PORT}`)
 })
