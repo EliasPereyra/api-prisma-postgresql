@@ -14,6 +14,17 @@ app.get("/users", async (req: Request, res: Response) => {
   res.json(allUsers)
 })
 
+app.get("/feed", async (req: Request, res: Response) => {
+  const allPosts = await prisma.post.findMany({
+    where: { published: true },
+    include: { author: true }
+  })
+
+  res.json(allPosts)
+})
+
+
+
 app.listen(PORT, () => {
   console.log(`The server is running on port ${PORT}`)
 })
