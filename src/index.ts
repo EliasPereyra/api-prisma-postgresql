@@ -42,8 +42,10 @@ app.post("/user", async (req: Request, res: Response) => {
     data: { ...req.body }
   })
 
-  res.json("User created")
+  res.json(user)
 })
+
+
 
 app.listen(PORT, () => {
   console.log(`The server is running on port ${PORT}`)
