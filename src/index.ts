@@ -15,12 +15,16 @@ app.get("/users", async (req: Request, res: Response) => {
 })
 
 app.get("/feed", async (req: Request, res: Response) => {
-  const allPosts = await prisma.post.findMany({
-    where: { published: true },
-    include: { author: true }
-  })
+  try {
+    const allPosts = await prisma.post.findMany({
+      where: { published: true },
+      include: { author: true }
+    })
 
-  res.json(allPosts)
+    res.json(allPosts)
+  } catch (error) {
+    res.json({ message: error })
+  }
 })
 
 app.get("/posts/:id", async (req: Request, res: Response) => {
@@ -31,6 +35,14 @@ app.get("/posts/:id", async (req: Request, res: Response) => {
   })
 
   res.json(post)
+})
+
+app.post("/user", async (req: Request, res: Response) => {
+  const user = await prisma.user.create({
+    data: { ...req.body }
+  })
+
+  res.json("User created")
 })
 
 app.listen(PORT, () => {
