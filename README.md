@@ -1,6 +1,6 @@
 # Rest API with Prisma and PostgreSQL
 
-This is a project for learning purposes.
+This is a project for learning purposes. A simple RESTful API, with CRUD operations.
 
 ## Built with
 
